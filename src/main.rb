@@ -1,6 +1,6 @@
 require 'date'
-Dir[File.expand_path('/Users/gauravsingh/work/dtree/wordle-game-bot/lib/*.rb', __FILE__)].each do |file|
-  p file
+PROJECT_ROOT_PATH = __dir__
+Dir[File.expand_path("#{PROJECT_ROOT_PATH}/../lib/*.rb", __FILE__)].each do |file|
   require file
 end
 

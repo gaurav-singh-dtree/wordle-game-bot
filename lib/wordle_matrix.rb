@@ -1,4 +1,4 @@
-Dir[File.expand_path('/Users/gauravsingh/work/dtree/wordle-game-bot/lib/matrix/*.rb', __FILE__)].each do |file|
+Dir[File.expand_path("#{PROJECT_ROOT_PATH}/../lib/matrix/*.rb", __FILE__)].each do |file|
   require file
 end
 
