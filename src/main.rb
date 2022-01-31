@@ -1,4 +1,3 @@
-require 'date'
 PROJECT_ROOT_PATH = __dir__
 Dir[File.expand_path("#{PROJECT_ROOT_PATH}/../lib/*.rb", __FILE__)].each do |file|
   require file
