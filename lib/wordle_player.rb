@@ -64,17 +64,17 @@ class WordlePlayer
   end
 
   def filter_for_green
-    self.possible_matches = self.possible_matches.filter { |word| !(word =~ /#{self.build_regex_for_position}/).nil? }
+    self.possible_matches = self.possible_matches.filter { |word| !(word =~ /#{build_regex_for_position}/).nil? }
   end
 
   def filter_for_yellow
-    self.possible_matches = self.possible_matches.filter do |word| 
+    self.possible_matches = self.possible_matches.filter do |word|
       wordle_matrix.yellow_matches_list.all? { |possible_char| word.include?(possible_char)}
     end
   end
 
   def filter_for_red
-    self.possible_matches = self.possible_matches.filter do |word| 
+    self.possible_matches = self.possible_matches.filter do |word|
       !wordle_matrix.red_matches_list.any? { |possible_char| word.include?(possible_char)}
     end
   end
