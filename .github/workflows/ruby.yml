@@ -30,4 +30,4 @@ jobs:
       - name: Install dependencies
         run: bundle install
       - name: Tweet
-        run: echo $TWITTER_CONSUMER_KEY
+        run: echo Test values $TWITTER_CONSUMER_KEY
