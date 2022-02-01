@@ -33,6 +33,7 @@ class WordlePlayer
       wordle_engine.increment_attempt
       wordle_engine.wordle_matrix.add_word(wordle_engine.next_word)
     end
+    TwitterResults.publish(wordle_engine.wordle_matrix.output)
     puts wordle_engine.wordle_matrix.output
   end
 
