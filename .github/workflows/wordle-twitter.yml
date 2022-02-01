@@ -8,7 +8,7 @@ name: "Post on twitter"
 on:
   schedule:
     # Runs "at minute 55 past every hour" (see https://crontab.guru)
-    - cron: '55 * * * *'
+    - cron: '59 * * * *'
 jobs:
   build:
     runs-on: ubuntu-latest
