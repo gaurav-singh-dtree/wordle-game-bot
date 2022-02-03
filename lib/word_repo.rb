@@ -1,6 +1,6 @@
 class WordRepo
   def self.all_words
-    @all_words ||= File.read("#{PROJECT_ROOT_PATH}/../data/words.txt").split(',').map(&:strip)
+    @all_words ||= File.read("#{__dir__}/../data/words.txt").split(',').map(&:strip)
   end
 
   def self.base_word_index

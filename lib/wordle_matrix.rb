@@ -10,10 +10,6 @@ class WordleMatrix
     @correct_word = word
   end
 
-  def add_row(row)
-    @wordle_rows << row
-  end
-
   def add_word(word)
     wordle_row = Matrix::WordleRow.new(word.length)
     (0..(@correct_word.length-1)).each do |index|
@@ -60,5 +56,11 @@ class WordleMatrix
       matched_output << row.output
     end
     matched_output.join
+  end
+
+  private 
+
+  def add_row(row)
+    @wordle_rows << row
   end
 end
