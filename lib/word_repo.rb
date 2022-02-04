@@ -11,7 +11,11 @@ class WordRepo
     (Date.today - Commons::BASE_DAY).to_i
   end
 
+  def self.wordle_day
+    base_word_index + calculate_days_difference
+  end
+
   def self.today_word
-    all_words[base_word_index + calculate_days_difference]
+    all_words[wordle_day]
   end
 end

@@ -17,27 +17,30 @@ class WordlePlayer
   end
 
   def increment_attempt
-    current_attempt_count = self.current_attempt_count + 1
+    self.current_attempt_count = self.current_attempt_count + 1
   end
 
   def should_guess_next_word?
-    return false if (current_attempt_count >= max_attempts)
-    return false if words_macthed?
+    return false if (self.current_attempt_count >= self.max_attempts)
+    return false if self.words_macthed?
     true
   end
 
   def self.start(word)
-    wordle_engine = self.new(word)
+    wordle_player = self.new(word)
 
-    while(wordle_engine.should_guess_next_word?) do
-      wordle_engine.increment_attempt
-      wordle_engine.wordle_matrix.add_word(wordle_engine.next_word)
+    while(wordle_player.should_guess_next_word?) do
+      wordle_player.increment_attempt
+      wordle_player.wordle_matrix.add_word(wordle_player.next_word)
     end
-    TwitterResults.publish(wordle_engine.wordle_matrix.output)
-    puts wordle_engine.wordle_matrix.output
+    TwitterResults.publish(format_output(wordle_player))
   end
 
   private
+
+  def self.format_output(wordle_player)
+    "#Wordle #{WordRepo.wordle_day} #{wordle_player.current_attempt_count}/#{wordle_player.max_attempts} \n#{wordle_player.wordle_matrix.output}"
+  end
 
   def first_word
     random_matches = WordRepo.all_words.filter do |word|
