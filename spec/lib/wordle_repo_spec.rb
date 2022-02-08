@@ -1,5 +1,4 @@
-PROJECT_ROOT_PATH = __dir__
-require "#{PROJECT_ROOT_PATH}/../spec_helper"
+require_relative '../spec_helper'
 
 RSpec.describe "WordleRepo" do
 

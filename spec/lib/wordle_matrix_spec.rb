@@ -1,5 +1,4 @@
-require "#{__dir__}/../spec_helper"
-require 'pry'
+require_relative '../spec_helper'
 
 RSpec.describe "WorldeMatrix" do
   let(:matrix) { WordleMatrix.new("place") }
