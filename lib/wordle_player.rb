@@ -9,6 +9,28 @@ class WordlePlayer
     @possible_matches = WordRepo.all_words
   end
 
+  def play_more?
+    return false if (self.current_attempt_count >= self.max_attempts)
+    return false if self.words_macthed?
+    true
+  end
+
+  def play
+    increment_attempt
+    wordle_matrix.add_word(wordle_player.next_word)
+  end
+
+  def self.start(word)
+    wordle_player = self.new(word)
+
+    while(wordle_player.play_more?) do
+      wordle_player.play
+    end
+    TwitterResults.publish(format_output(wordle_player))
+  end
+
+  private
+
   def next_word
     filter_for_green
     filter_for_red
@@ -19,24 +41,6 @@ class WordlePlayer
   def increment_attempt
     self.current_attempt_count = self.current_attempt_count + 1
   end
-
-  def should_guess_next_word?
-    return false if (self.current_attempt_count >= self.max_attempts)
-    return false if self.words_macthed?
-    true
-  end
-
-  def self.start(word)
-    wordle_player = self.new(word)
-
-    while(wordle_player.should_guess_next_word?) do
-      wordle_player.increment_attempt
-      wordle_player.wordle_matrix.add_word(wordle_player.next_word)
-    end
-    TwitterResults.publish(format_output(wordle_player))
-  end
-
-  private
 
   def self.format_output(wordle_player)
     "#Wordle #{WordRepo.wordle_day} #{wordle_player.current_attempt_count}/#{wordle_player.max_attempts} \n#{wordle_player.wordle_matrix.output}"

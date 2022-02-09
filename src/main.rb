@@ -10,6 +10,4 @@ class WordleGame
   end
 end
 
-# today_word = WordRepo.today_word
-# WordlePlayer.start(today_word)
 WordleGame.play
