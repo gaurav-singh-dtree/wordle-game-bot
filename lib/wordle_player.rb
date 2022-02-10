@@ -3,20 +3,21 @@ class WordlePlayer
 
   def initialize(word)
     @max_attempts = word.length + 1
-    @current_attempt_count = 1
+    @current_attempt_count = 0
     @wordle_matrix = WordleMatrix.new(word)
     @finder = WordFinder.new(wordle_matrix)
-    @wordle_matrix.add_word(@finder.first_word)
   end
 
   def play_more?
-    return false if (self.current_attempt_count >= self.max_attempts)
-    return false if self.words_macthed?
+    return false if (current_attempt_count >= max_attempts)
+    return false if words_macthed?
     true
   end
 
   def play
     increment_attempt
+    return wordle_matrix.add_word(@finder.first_word) if (current_attempt_count == 1)
+
     wordle_matrix.add_word(next_word)
   end
 
@@ -36,7 +37,7 @@ class WordlePlayer
   end
 
   def increment_attempt
-    self.current_attempt_count = self.current_attempt_count + 1
+    self.current_attempt_count = current_attempt_count + 1
   end
 
   def self.format_output(wordle_player)
@@ -44,6 +45,6 @@ class WordlePlayer
   end
 
   def words_macthed?
-    wordle_matrix.wordle_rows.last.green?
+    wordle_matrix.wordle_rows&.last&.green?
   end
 end
