@@ -27,7 +27,8 @@ class WordlePlayer
     while(wordle_player.play_more?) do
       wordle_player.play
     end
-    TwitterResults.publish(format_output(wordle_player))
+    puts format_output(wordle_player)
+    # TwitterResults.publish(format_output(wordle_player))
   end
 
   private

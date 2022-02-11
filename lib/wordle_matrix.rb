@@ -27,7 +27,7 @@ class WordleMatrix
   def green_matches
     matches = []
     @wordle_rows.last.wordle_boxes.each do |box, index|
-      g = nil
+      g = nil #use nil for positional regex building
       g = box.current_char if box.green?
       matches << g
     end
@@ -35,19 +35,11 @@ class WordleMatrix
   end
 
   def red_matches_list
-    not_matched_list = []
-    @wordle_rows.each do |row|
-      not_matched_list << row.red_chars
-    end
-    not_matched_list.flatten.uniq
+    match_list_for(:red_chars)
   end
 
   def yellow_matches_list
-    possible_matched_list = []
-    @wordle_rows.each do |row|
-      possible_matched_list << row.yellow_chars
-    end
-    possible_matched_list.flatten.uniq
+    match_list_for(:yellow_chars)
   end
 
   def output
@@ -62,5 +54,13 @@ class WordleMatrix
 
   def add_row(row)
     @wordle_rows << row
+  end
+
+  def match_list_for(color)
+    possible_matched_list = []
+    @wordle_rows.each do |row|
+      possible_matched_list << row.send(color)
+    end
+    possible_matched_list.flatten.uniq
   end
 end
