@@ -37,4 +37,12 @@ RSpec.describe "WorldeMatrix" do
       expect(matrix.red_matches_list.compact).to eq(['h', 't'])
     end
   end
+
+  context "#yellow_matches_list" do
+    it "should return matched chars" do
+      matrix = WordleMatrix.new("magic")
+      matrix.add_word("might")
+      expect(matrix.yellow_matches_list.compact).to eq(['i'])
+    end
+  end
 end
